@@ -6,6 +6,7 @@ Cypress.on('uncaught:exception', (err) => {
     }
 })
 const testImageName = 'M17_SWex.fits'
+// const testImageName = 'hugeGaussian10k.fits'
 describe('Open_file_browser', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
@@ -42,10 +43,14 @@ describe('Open_file_browser', () => {
                 const value = parseFloat(text)
                 expect(value).not.to.be.equal(0)
             }) // Clip Min != 0
+
+        cy.get('canvas#raster-canvas')
+            // .screenshot()
             .then(() => {
                 cy.wrap(performance.now()).then(t1 => {
                     cy.log(`Image load took ${t1 - t0} milliseconds.`);
                 })
             })
+
     })
 })
