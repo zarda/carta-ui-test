@@ -5,14 +5,24 @@ Cypress.on('uncaught:exception', (err) => {
         return false
     }
 })
-
+const testFolder = 'set_QA'
+const testImageName = 'M17_SWex.fits'
+// const testImageName = 'hugeGaussian20k.fits'
 describe('Open_file_browser', () => {
-    it('Visits the carta demo server', () => {
+    it(`Visits the carta demo server and open image "${testFolder}/${testImageName}"`, () => {
         const t0 = performance.now()
-        cy.visit('&folder=set_QA&file=M17_SWex.fits')
-        // cy.get('[class="tag-image-ratio"]').should('have.css', 'opacity', '1')
-        cy.get('[class="tag-image-ratio"]').should('have.css', 'opacity', '0')
-        cy.get('[class="raster-canvas"]').should('be.visible').then(()=>{
+        cy.visit(`&folder=${testFolder}&file=${testImageName}`)
+        cy.get('[class="bp3-label"]').contains('Clip Min').then(()=>{
+            cy.wrap(performance.now()).then(t1 => {
+                cy.log(`Image load took ${t1 - t0} milliseconds.`);
+            })
+        })
+    })
+
+    it(`Re-do open image "${testFolder}/${testImageName}"`, () => {
+        const t0 = performance.now()
+        cy.visit(`&folder=${testFolder}&file=${testImageName}`)
+        cy.get('[class="bp3-label"]').contains('Clip Max').then(()=>{
             cy.wrap(performance.now()).then(t1 => {
                 cy.log(`Image load took ${t1 - t0} milliseconds.`);
             })

@@ -10,6 +10,9 @@ describe('Close_file_browser', () => {
         cy.visit('')
         cy.get('[class="bp3-button-text"]').contains('Close')
     })
+    it(`Reload`, ()=> {
+        cy.reload(true)
+    })
     it(`Close file browser`, ()=>{
         cy.get('[class="bp3-button-text"]').contains('Close').click()
     })
