@@ -5,18 +5,25 @@ Cypress.on('uncaught:exception', (err) => {
         return false
     }
 })
+const testImageName = 'M17_SWex.fits'
 describe('Open_file_browser', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
-        cy.wait(2000)
+        cy.get('[class="bp3-button-text"]').contains('Close')
     })
     it(`Open folder "set_QA"`, ()=>{
         cy.get('input').type('set_QA')
         cy.get(`[title="set_QA"]`).click()
     })
-    it(`Open image "M17_SWex.fits"`, ()=>{
-        cy.get('input').type('M17_SWex.fits')
-        cy.get(`[title="M17_SWex.fits"]`).click()
+    it(`Open image "${testImageName}"`, ()=>{
+        cy.get('input').type(testImageName)
+        cy.get(`[title="${testImageName}"]`).click()
+        const t0 = performance.now()
         cy.get('[class="bp3-button-text"]').contains('Load').click()
+        cy.get('[class="bp3-button-text"]', {timeout: 20000}).contains('Load', {timeout: 20000}).should('not.exist').then(()=>{
+            cy.wrap(performance.now()).then(t1 => {
+                cy.log(`Image load: ${t1 - t0} milliseconds.`);
+            })
+        })
     })
 })

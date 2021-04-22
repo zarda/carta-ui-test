@@ -8,7 +8,7 @@ Cypress.on('uncaught:exception', (err) => {
 describe('Close_file_browser', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
-        cy.wait(2000)
+        cy.get('[class="bp3-button-text"]').contains('Close')
     })
     it(`Close file browser`, ()=>{
         cy.get('[class="bp3-button-text"]').contains('Close').click()

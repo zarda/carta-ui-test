@@ -8,7 +8,7 @@ Cypress.on('uncaught:exception', (err) => {
 describe('Open_file_browser', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
-        cy.wait(2000)
+        cy.get('[class="bp3-button-text"]').contains('Close')
     })
     it(`Close file browser`, ()=>{
         cy.get('[class="bp3-button-text"]').contains('Close').click()
@@ -16,5 +16,6 @@ describe('Open_file_browser', () => {
     it(`Open file browser`, ()=>{
         cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('File').click()
         cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('Open image').click()
+        cy.get('[class="bp3-button-text"]').contains('Close').should('be.exist')
     })
 })
