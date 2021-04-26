@@ -7,6 +7,8 @@ Cypress.on('uncaught:exception', (err) => {
 })
 const testImageName = 'M17_SWex.fits'
 // const testImageName = 'hugeGaussian10k.fits'
+const repeatTimes = 3
+
 describe('Open_file_browser', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
@@ -24,33 +26,68 @@ describe('Open_file_browser', () => {
             .contains('Load')
             .click()
 
-        cy.get('[class="bp3-button-text"]', { timeout: 20000 })
-            .contains('Load', { timeout: 20000 })
+        cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
 
-        cy.get('[class="bp3-label"]', { timeout: 20000 })
-            .contains('Clip Min', { timeout: 20000 })
-
-        cy.get('input')
-            .get('[type="text"]')
-            .first()
-            .should('have.value', 0) // Clip Min == 0
-
-        cy.get('input')
-            .get('[type="text"]')
-            .first()
-            .invoke('val')
-            .should(text => {
-                const value = parseFloat(text)
-                expect(value).not.to.be.equal(0)
-            }) // Clip Min != 0
+        cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
 
         cy.get('canvas#raster-canvas')
-            // .screenshot()
+            .should('have.attr', 'width')
             .then(() => {
                 cy.wrap(performance.now()).then(t1 => {
-                    cy.log(`Image load took ${t1 - t0} milliseconds.`);
+                    const duration = t1 - t0
+                    cy.log(`Image load took ${duration} milliseconds.`);
+                    timeLog.push(duration)
                 })
             })
+        cy.wait(500)
+        // .get('canvas#raster-canvas')
+        // .screenshot()
 
+
+        cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('File').click()
+        cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('Close image').click()
+
+    })
+
+    let timeLog = [];
+    for (let i = 0; i < repeatTimes; i++) {
+        it(`Reopen image "${testImageName}"`, () => {
+            cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('File').click()
+            cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('Open image').click()
+
+            cy.get('input').type(testImageName)
+            cy.get(`[title="${testImageName}"]`).click()
+            const t0 = performance.now()
+            cy.get('[class="bp3-button-text"]')
+                .contains('Load')
+                .click()
+
+            cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
+
+            cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
+
+            cy.get('canvas#raster-canvas')
+                .should('have.attr', 'width')
+                .then(() => {
+                    cy.wrap(performance.now()).then(t1 => {
+                        const duration = t1 - t0
+                        cy.log(`Image load took ${duration} milliseconds.`);
+                        timeLog.push(duration)
+                    })
+                })
+
+            cy.wait(500)
+            cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('File').click()
+            cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]').contains('Close image').click()
+        })
+    }
+
+    it(`Report`, () => {
+        timeLog.map(value => cy.log(value + ' ms'))
+        const timeSum = timeLog.reduce((a, c) => a + c)
+        const timeMean = timeSum / timeLog.length
+        cy.log('Mean= ' + timeMean.toFixed(2) + ' ms')
+        const timeDev = Math.sqrt(timeLog.reduce((a, c) => a + Math.pow(c - timeMean, 2))) / timeLog.length
+        cy.log('Dev= ' + timeDev.toFixed(2) + ' ms')
     })
 })
