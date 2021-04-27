@@ -7,7 +7,8 @@ Cypress.on('uncaught:exception', (err) => {
 })
 const testImageName = 'M17_SWex.fits'
 const testRegionName = 'M17_SWex_test_world.crtf'
-const repeat = 11
+const repeatTrigger = 11
+const repeatCancel = 20
 describe('Open testing image', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
@@ -131,17 +132,17 @@ describe('Test moment generator', () => {
     it('Trigger moment generator', () => {
         let t0 = performance.now()
         cy.get('[class="bp3-button bp3-intent-success"]')
-            .contains('Generate')
-            .click()
+            .contains('Generate', { timeout: 20000 })
+            .click({ timeout: 20000 })
             .then(() => {
                 cy.wrap(performance.now()).then(t1 => {
                     t0 = performance.now()
                 })
             })
-        for (let i = 1; i < repeat; i++) {
-            cy.get('[class="bp3-button bp3-intent-success"]')
+        for (let i = 1; i < repeatTrigger; i++) {
+            cy.get('[class="bp3-button bp3-intent-success"]', { timeout: 20000 })
                 .contains('Generate')
-                .click()
+                .click({ timeout: 20000 })
                 .then(() => {
                     cy.wrap(performance.now()).then(t1 => {
                         const duration = t1 - t0
@@ -160,4 +161,20 @@ describe('Test moment generator', () => {
         const timeDev = Math.sqrt(timeLog.reduce((a, c) => a + Math.pow(c - timeMean, 2))) / timeLog.length
         cy.log('Dev= ' + timeDev.toFixed(2) + ' ms')
     })
+})
+
+describe('Cancel moment generator', () => {
+    for (let i = 1; i < repeatCancel; i++) {
+        const waitTime = 800
+        it(`Trigger, wait ${waitTime}ms and cancel moment generator`, () => {
+            cy.get('[class="bp3-button bp3-intent-success"]')
+                .contains('Generate')
+                .click()
+                .wait(waitTime)
+            cy.get('[class="bp3-button-text"]')
+                .contains('Cancel')
+                .click()
+        })
+    }
+
 })
