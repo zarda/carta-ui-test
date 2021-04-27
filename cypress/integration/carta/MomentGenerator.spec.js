@@ -7,8 +7,8 @@ Cypress.on('uncaught:exception', (err) => {
 })
 const testImageName = 'M17_SWex.fits'
 const testRegionName = 'M17_SWex_test_world.crtf'
-const repeatTrigger = 11
-const repeatCancel = 20
+const repeatTrigger = 3
+const repeatCancel = 4
 describe('Open testing image', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
@@ -164,9 +164,9 @@ describe('Test moment generator', () => {
 })
 
 describe('Cancel moment generator', () => {
-    for (let i = 1; i < repeatCancel; i++) {
-        const waitTime = 800
-        it(`Trigger, wait ${waitTime}ms and cancel moment generator`, () => {
+    const waitTime = 800
+    it(`Trigger, wait ${waitTime}ms and cancel moment generator`, () => {
+        for (let i = 1; i < repeatCancel; i++) {
             cy.get('[class="bp3-button bp3-intent-success"]')
                 .contains('Generate')
                 .click()
@@ -174,7 +174,7 @@ describe('Cancel moment generator', () => {
             cy.get('[class="bp3-button-text"]')
                 .contains('Cancel')
                 .click()
-        })
-    }
+        }
+    })
 
 })
