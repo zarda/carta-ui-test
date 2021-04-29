@@ -1,3 +1,4 @@
+import config from '../../../cypress.json'
 const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/
 Cypress.on('uncaught:exception', (err) => {
     /* returning false here prevents Cypress from failing the test */
@@ -8,12 +9,13 @@ Cypress.on('uncaught:exception', (err) => {
 const testFolder = 'set_QA'
 const testImageName = 'M17_SWex.fits'
 // const testImageName = 'hugeGaussian10k.fits'
-const repeatTimes = 11
+const repeatTimes = 5
 
 describe('Open_file_browser', () => {
     it(`Visits the carta demo server and open image "${testFolder}/${testImageName}"`, () => {
         const t0 = performance.now()
-        cy.visit(`&folder=${testFolder}&file=${testImageName}`)
+        cy.log(config.baseUrl)
+        cy.visit(`${config.baseUrl.includes('?')?'&':'?'}folder=${testFolder}&file=${testImageName}`)
 
         cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
 
