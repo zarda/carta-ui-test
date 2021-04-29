@@ -24,6 +24,7 @@ describe('Open testing image', () => {
     it(`Open image "${testImageName}"`, () => {
         cy.get('input:first').type(testImageName)
         cy.get(`[title="${testImageName}"]`).dblclick()
+        cy.get('h4.bp3-heading').contains('Loading file info...').should('not.exist')
 
         cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
 

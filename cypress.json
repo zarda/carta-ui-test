@@ -1,4 +1,4 @@
 {
-    "baseUrl0": "http://carta.asiaa.sinica.edu.tw/frontend/dev/?socketUrl=wss://carta.asiaa.sinica.edu.tw/socketdev",
-    "baseUrl": "http://localhost:3000"
+    "baseUrl": "http://carta.asiaa.sinica.edu.tw/frontend/dev/?socketUrl=wss://carta.asiaa.sinica.edu.tw/socketdev",
+    "baseUrl0": "http://localhost:3000"
 }

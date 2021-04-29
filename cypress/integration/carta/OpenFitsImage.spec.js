@@ -7,7 +7,7 @@ Cypress.on('uncaught:exception', (err) => {
 })
 const testImageName = 'M17_SWex.fits'
 // const testImageName = 'hugeGaussian10k.fits'
-const repeatTimes = 3
+const repeatTimes = 5
 
 describe('Open_file_browser', () => {
     it('Visits the carta demo server', () => {
@@ -21,6 +21,8 @@ describe('Open_file_browser', () => {
     it(`Open image "${testImageName}"`, () => {
         cy.get('input').type(testImageName)
         cy.get(`[title="${testImageName}"]`).click()
+        cy.get('h4.bp3-heading').contains('Loading file info...').should('not.exist')
+
         const t0 = performance.now()
         cy.get('[class="bp3-button-text"]')
             .contains('Load')
@@ -57,6 +59,8 @@ describe('Open_file_browser', () => {
 
             cy.get('input').type(testImageName)
             cy.get(`[title="${testImageName}"]`).click()
+            cy.get('h4.bp3-heading').contains('Loading file info...').should('not.exist')
+
             const t0 = performance.now()
             cy.get('[class="bp3-button-text"]')
                 .contains('Load')
