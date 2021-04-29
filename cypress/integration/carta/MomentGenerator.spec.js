@@ -26,9 +26,8 @@ describe('Open testing image', () => {
         cy.get(`[title="${testImageName}"]`).dblclick()
         cy.get('h4.bp3-heading').contains('Loading file info...').should('not.exist')
 
-        cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
-
-        cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
+        // cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
+        // cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
 
         cy.get('canvas#raster-canvas')
             .should('have.attr', 'width')
@@ -61,6 +60,9 @@ describe('Import regions', () => {
         cy.get(`[class="cell-text"]`)
             .contains(testRegionName)
             .click({ force: true })
+        cy.get('h4.bp3-heading')
+            .contains('Loading file info...')
+            .should('not.exist')
         cy.get('[class="bp3-button-text"]')
             .contains('Load Region')
             .click()

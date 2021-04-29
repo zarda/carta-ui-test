@@ -28,9 +28,8 @@ describe('Open_file_browser', () => {
             .contains('Load')
             .click()
 
-        cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
-
-        cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
+        // cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
+        // cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
 
         cy.get('canvas#raster-canvas')
             .should('have.attr', 'width')
@@ -66,9 +65,8 @@ describe('Open_file_browser', () => {
                 .contains('Load')
                 .click()
 
-            cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
-
-            cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
+            // cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon icon-visible"]')
+            // cy.get('[class="bp3-icon bp3-icon-cloud-download contour-loading-icon"]')
 
             cy.get('canvas#raster-canvas')
                 .should('have.attr', 'width')
