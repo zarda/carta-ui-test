@@ -147,7 +147,7 @@ orbs:
 #           at: ~/
 #       - run: npm run semantic-release
 
-# workflows:
+workflows:
 #   win-build:
 #     jobs:
 #       - win-test
