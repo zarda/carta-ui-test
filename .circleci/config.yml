@@ -22,7 +22,7 @@ orbs:
   #     resource_class: "windows.medium"
   #     shell: "bash.exe"
 
-jobs:
+# jobs:
 #   win-test:
 #     working_directory: ~/app
 #     executor: win
