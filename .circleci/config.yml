@@ -22,7 +22,7 @@ orbs:
   #     resource_class: "windows.medium"
   #     shell: "bash.exe"
 
-jobs:
+# jobs:
 #   win-test:
 #     working_directory: ~/app
 #     executor: win
@@ -233,7 +233,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/included:7.2.0
+          executor: cypress/browsers-chrome73-ff68
           # use browser "chrome" for running tests
           browser: chrome
           record: true
@@ -249,7 +249,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/included:7.2.0
+          executor: cypress/browsers-chrome73-ff68
           # use browser "chrome" for running tests
           browser: firefox
           record: true
