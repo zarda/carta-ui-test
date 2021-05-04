@@ -233,7 +233,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/browsers:node13.6.0-chrome80-ff72
+          executor: cypress/browsers:latest
           # use browser "chrome" for running tests
           browser: chrome
           record: false
@@ -249,7 +249,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: ccypress/browsers:node13.6.0-chrome80-ff72
+          executor: cypress/browsers:latest
           # use browser "chrome" for running tests
           browser: firefox
           record: false
