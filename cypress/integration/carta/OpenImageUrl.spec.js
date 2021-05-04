@@ -9,7 +9,7 @@ Cypress.on('uncaught:exception', (err) => {
 const testFolder = 'set_QA'
 const testImageName = 'M17_SWex.fits'
 // const testImageName = 'hugeGaussian10k.fits'
-const repeatTimes = 5
+const repeatTimes = 4
 
 describe('Open_file_browser', () => {
     it(`Visits the carta demo server and open image "${testFolder}/${testImageName}"`, () => {
