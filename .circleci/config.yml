@@ -140,12 +140,12 @@ jobs:
 #       - store_artifacts:
 #           path: cypress\videos
 
-  release:
-    executor: cypress/default
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: npm run semantic-release
+  # release:
+  #   executor: cypress/default
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/
+  #     - run: npm run semantic-release
 
 workflows:
   # win-build:
@@ -233,7 +233,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/default
+          executor: cypress/included:7.2.0
           # use browser "chrome" for running tests
           browser: chrome
           record: true
@@ -249,7 +249,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/default
+          executor: cypress/included:7.2.0
           # use browser "chrome" for running tests
           browser: firefox
           record: true
