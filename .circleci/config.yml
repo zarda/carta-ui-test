@@ -22,7 +22,7 @@ orbs:
   #     resource_class: "windows.medium"
   #     shell: "bash.exe"
 
-# jobs:
+jobs:
 #   win-test:
 #     working_directory: ~/app
 #     executor: win
@@ -140,12 +140,12 @@ orbs:
 #       - store_artifacts:
 #           path: cypress\videos
 
-  # release:
-  #   executor: cypress/default
-  #   steps:
-  #     - attach_workspace:
-  #         at: ~/
-  #     - run: npm run semantic-release
+  release:
+    executor: cypress/browsers-chrome73-ff68
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run semantic-release
 
 workflows:
   # win-build:
