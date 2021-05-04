@@ -214,20 +214,20 @@ workflows:
       - cypress/run:
           # name this job because we are running "cypress/run" several times
           # with different parameters
-          name: '3 machines'
+          name: 'electron'
           # job will use workspace with code and dependencies
           # installed by the "install" job
           requires:
             - Linux install
-          record: false # record results on Cypress dashboard
+          record: true # record results on Cypress dashboard
           parallel: false # load balance all tests
           parallelism: 1 # across 3 machines
-          group: '3x-electron on CircleCI' # name this group
+          group: 'electron on CircleCI' # name this group
           start: 'npm run start:ci' # start server before running tests
 
       # run on 2 machines using Chrome browser
       - cypress/run:
-          name: '2 machines using Chrome'
+          name: 'machines using Chrome'
           # job will use workspace with code and dependencies
           # installed by the "install" job
           requires:
@@ -236,14 +236,14 @@ workflows:
           executor: cypress/browsers-chrome76
           # use browser "chrome" for running tests
           browser: chrome
-          record: false
+          record: true
           parallel: false
           parallelism: 1
-          group: '2x-chrome on CircleCI'
+          group: 'chrome on CircleCI'
           start: 'npm run start:ci'
 
       - cypress/run:
-          name: '2 machines using Firefox'
+          name: 'machines using Firefox'
           # job will use workspace with code and dependencies
           # installed by the "install" job
           requires:
@@ -252,10 +252,10 @@ workflows:
           executor: cypress/browsers-chrome73-ff68
           # use browser "chrome" for running tests
           browser: firefox
-          record: false
+          record: true
           parallel: false
           parallelism: 1
-          group: '2x-firefox on CircleCI'
+          group: 'firefox on CircleCI'
           start: 'npm run start:ci'
 
       - release:
@@ -266,4 +266,4 @@ workflows:
           requires:
             - Linux install
             - Linux lint
-            - 3 machines
+            - electron
