@@ -233,7 +233,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/base:14.16.0
+          executor: cypress/default
           # use browser "chrome" for running tests
           browser: chrome
           record: false
@@ -249,7 +249,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/base:14.16.0
+          executor: cypress/default
           # use browser "chrome" for running tests
           browser: firefox
           record: false
