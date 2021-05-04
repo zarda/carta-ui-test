@@ -233,7 +233,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/browsers-chrome90
+          executor: cypress/browsers-chrome89-ff86
           # use browser "chrome" for running tests
           browser: chrome
           record: true
@@ -242,21 +242,21 @@ workflows:
           group: '1x-chrome on CircleCI'
           start: 'npm run start:ci'
 
-      # - cypress/run:
-      #     name: '2 machines using Firefox'
-      #     # job will use workspace with code and dependencies
-      #     # installed by the "install" job
-      #     requires:
-      #       - Linux install
-      #     # use executor with Chrome installed
-      #     executor: cypress/browsers-chrome73-ff68
-      #     # use browser "chrome" for running tests
-      #     browser: firefox
-      #     record: true
-      #     parallel: true
-      #     parallelism: 2
-      #     group: '2x-firefox on CircleCI'
-      #     start: 'npm run start:ci'
+      - cypress/run:
+          name: '1 machines using Firefox'
+          # job will use workspace with code and dependencies
+          # installed by the "install" job
+          requires:
+            - Linux install
+          # use executor with Chrome installed
+          executor: cypress/browsers-chrome89-ff86
+          # use browser "chrome" for running tests
+          browser: firefox
+          record: true
+          parallel: true
+          parallelism: 2
+          group: '1x-firefox on CircleCI'
+          start: 'npm run start:ci'
 
       - release:
           filters:
