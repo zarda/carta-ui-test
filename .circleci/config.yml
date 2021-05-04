@@ -253,7 +253,7 @@ workflows:
           # use browser "chrome" for running tests
           browser: firefox
           record: false
-          parallel: trufalsee
+          parallel: false
           parallelism: 2
           group: '2x-firefox on CircleCI'
           start: 'npm run start:ci'
