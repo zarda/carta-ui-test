@@ -221,7 +221,7 @@ workflows:
             - Linux install
           record: false # record results on Cypress dashboard
           parallel: false # load balance all tests
-          parallelism: 3 # across 3 machines
+          parallelism: 1 # across 3 machines
           group: '3x-electron on CircleCI' # name this group
           start: 'npm run start:ci' # start server before running tests
 
@@ -233,12 +233,12 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/default
+          executor: cypress/browsers-chrome76
           # use browser "chrome" for running tests
-          browser: google-chrome
+          browser: chrome
           record: false
           parallel: false
-          parallelism: 2
+          parallelism: 1
           group: '2x-chrome on CircleCI'
           start: 'npm run start:ci'
 
@@ -249,12 +249,12 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/default
+          executor: cypress/browsers-chrome73-ff68
           # use browser "chrome" for running tests
           browser: firefox
           record: false
           parallel: false
-          parallelism: 2
+          parallelism: 1
           group: '2x-firefox on CircleCI'
           start: 'npm run start:ci'
 
