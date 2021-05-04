@@ -141,7 +141,7 @@ jobs:
 #           path: cypress\videos
 
   release:
-    executor: cypress/base:14.16.0
+    executor: cypress/base:ubuntu19-node12.14.1
     steps:
       - attach_workspace:
           at: ~/
