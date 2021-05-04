@@ -10,7 +10,7 @@ orbs:
   # use Cypress orb from CircleCI registry
   cypress: cypress-io/cypress@1.28.0
 
-executors:
+# executors:
   # mac:
   #   macos:
   #     xcode: "10.1.0"
@@ -141,7 +141,7 @@ jobs:
 #           path: cypress\videos
 
   release:
-    executor: cypress/base:ubuntu19-node12.14.1
+    executor: cypress/default
     steps:
       - attach_workspace:
           at: ~/
@@ -233,7 +233,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/browsers:latest
+          executor: cypress/default
           # use browser "chrome" for running tests
           browser: chrome
           record: true
@@ -249,7 +249,7 @@ workflows:
           requires:
             - Linux install
           # use executor with Chrome installed
-          executor: cypress/browsers:latest
+          executor: cypress/default
           # use browser "chrome" for running tests
           browser: firefox
           record: true
