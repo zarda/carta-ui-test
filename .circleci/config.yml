@@ -10,7 +10,7 @@ orbs:
   # use Cypress orb from CircleCI registry
   cypress: cypress-io/cypress@1.26.0
 
-# executors:
+executors:
   # mac:
   #   macos:
   #     xcode: "10.1.0"
@@ -22,7 +22,7 @@ orbs:
   #     resource_class: "windows.medium"
   #     shell: "bash.exe"
 
-# jobs:
+jobs:
 #   win-test:
 #     working_directory: ~/app
 #     executor: win
@@ -140,19 +140,19 @@ orbs:
 #       - store_artifacts:
 #           path: cypress\videos
 
-#   release:
-#     executor: cypress/base-10
-#     steps:
-#       - attach_workspace:
-#           at: ~/
-#       - run: npm run semantic-release
+  release:
+    executor: cypress/base-10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run semantic-release
 
 workflows:
-#   win-build:
-#     jobs:
-#       - win-test
-#       - win-test-chrome
-#       - win-test-firefox
+  # win-build:
+  #   jobs:
+  #     - win-test
+  #     - win-test-chrome
+  #     - win-test-firefox
 
   # mac-build:
   #   jobs:
