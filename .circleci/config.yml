@@ -10,7 +10,7 @@ orbs:
   # use Cypress orb from CircleCI registry
   cypress: cypress-io/cypress@1.26.0
 
-executors:
+# executors:
   # mac:
   #   macos:
   #     xcode: "10.1.0"
