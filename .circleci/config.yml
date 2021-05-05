@@ -24,11 +24,6 @@ jobs:
             - ~/.npm
             - ~/.cache
   test:
-    docker:
-      - image: cypress/included:7.2.0
-        environment:
-          TERM: xterm
-    working_directory: ~/app
     parallelism: 1
     steps:
       - checkout
