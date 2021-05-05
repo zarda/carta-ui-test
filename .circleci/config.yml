@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build:
+  build&test:
     docker:
       # the Docker image with Cypress dependencies
       - image: cypress/base:ubuntu19-node12.14.1
@@ -23,9 +23,6 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-  test:
-    parallelism: 1
-    steps:
       - run:
           name: Running E2E tests with JUnit reporter
           command: npm run test-junit
