@@ -8,7 +8,7 @@ Cypress.on('uncaught:exception', (err) => {
 const testImageName = 'M17_SWex.fits'
 const testRegionName = 'M17_SWex_test_world.crtf'
 const repeatTrigger = 3
-const repeatCancel = 4
+const repeatCancel = 8
 describe('Open testing image', () => {
     it('Visits the carta demo server', () => {
         cy.visit('')
@@ -87,8 +87,8 @@ describe('Open dialog of moment', () => {
     })
     it('Select on moment generator dialog', () => {
         cy.get('[class="bp3-html-select unlinked-to-selected"]>select')
-            .eq(2)
-            .select('0')
+            .eq(1)
+            .select('2')
         cy.get('[class="bp3-input-ghost bp3-multi-select-tag-input-input"]')
             .click({ force: true })
         cy.get('[class="bp3-text-overflow-ellipsis bp3-fill"]')
@@ -167,16 +167,18 @@ describe('Test moment generator', () => {
 })
 
 describe('Cancel moment generator', () => {
-    const waitTime = 800
+    const waitTime = 80
     it(`Trigger, wait ${waitTime}ms and cancel moment generator`, () => {
-        for (let i = 1; i < repeatCancel; i++) {
+        for (let i = 1; i <= repeatCancel; i++) {
             cy.get('[class="bp3-button bp3-intent-success"]')
                 .contains('Generate')
                 .click()
-                .wait(waitTime)
+                .wait(waitTime+i*20)
             cy.get('[class="bp3-button-text"]')
-                .contains('Cancel')
-                .click()
+                .contains('Cancel').then(bt => {
+                    if (bt)
+                        bt.click()
+                })
         }
     })
 
