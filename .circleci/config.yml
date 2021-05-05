@@ -1,10 +1,10 @@
 version: 2
 
 jobs:
-  build&test:
+  build:
     docker:
       # the Docker image with Cypress dependencies
-      - image: cypress/base:ubuntu19-node12.14.1
+      - image: cypress/included:latest
         environment:
           ## this enables colors in the output
           TERM: xterm
