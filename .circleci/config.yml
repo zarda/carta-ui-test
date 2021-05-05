@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build:
+  build&test:
     docker:
       # the Docker image with Cypress dependencies
       - image: cypress/base:ubuntu19-node12.14.1
